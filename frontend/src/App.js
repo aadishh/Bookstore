@@ -9,22 +9,33 @@ import Books from "./components/Books/Books.page";
 import HomePage from "./components/Home/HomePage";
 import SingleBook from "./components/SingleBook/singleBook.page";
 import Login from "./components/Login/loginPage";
+import { useState } from "react";
 
 function App() {
+  const [login, setLogin] = useState(false);
+
   return (
     <div className="App bg-gray-100">
-      <Navbar />
-      <Routes>
-        {/* <Route path="/" element={<Login />} /> */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/myBook" element={<SingleBook />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-      <Footer />
+      {login ? (
+        <div>
+          <Navbar />
+          <Routes>
+            {/* <Route path="/" element={<Login />} /> */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/books" element={<Books />} />
+            <Route path="/myBook" element={<SingleBook />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/cart" element={<Cart />} />
+          </Routes>
+          <Footer />
+        </div>
+      ) : (
+        <div className="w-full h-screen">
+          <Login />
+        </div>
+      )}
     </div>
   );
 }

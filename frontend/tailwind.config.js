@@ -14,6 +14,7 @@ module.exports = {
         shark: "#25272D",
         abbey: "#696E77",
         "santas-gray": "#A0A1A7",
+        "east-side": "#af84ce",
       },
     },
   },
