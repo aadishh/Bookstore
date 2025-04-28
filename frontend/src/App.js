@@ -10,6 +10,7 @@ import HomePage from "./components/Home/HomePage";
 import SingleBook from "./components/SingleBook/singleBook.page";
 import Login from "./components/Login/loginPage";
 import { useState } from "react";
+import LoginHomePage from "./components/Home/LoginHomePage";
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -33,7 +34,10 @@ function App() {
         </div>
       ) : (
         <div className="w-full h-screen">
-          <Login />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<LoginHomePage />} />
+          </Routes>
         </div>
       )}
     </div>

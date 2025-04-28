@@ -28,3 +28,21 @@ export const SignUpForUser = async (payload) => {
       return null;
     }
   };
+
+export const LoginUser = async (payload) => {
+  try {
+    const response = await fetch("http://localhost:2000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload), // Convert book object to JSON
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error adding book:", error);
+    return null;
+  }
+};

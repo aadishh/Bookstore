@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import CustomButton from "../CustomButton";
-import { SignUpForUser } from "../../services/service";
+import { LoginUser, SignUpForUser } from "../../services/service";
 
 const Login = () => {
   const [showSignup, setShowSignup] = useState(false);
   const [username, setUsername] = useState("");
+  const [createUserName, setCreateUserName] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,12 +16,14 @@ const Login = () => {
     let payload = {
       firstName: firstName,
       lastName: lastName,
+      userName: createUserName,
       email: email,
       password: signUpPassword,
     };
 
     SignUpForUser(payload).then((resp) => {
       if (resp?.statusCode === 200) {
+        
         setShowSignup(false);
       } else {
         setShowSignup(true);
@@ -33,13 +36,24 @@ const Login = () => {
       username: username,
       password: password,
     };
+    LoginUser(payload).then((resp) => {
+      if(resp?.statusCode === 200) {
+        // Handle successful login
+        console.log("Login successful", resp);
+      }
+      else {
+        console.log("Login failed", resp);
+      }
+    });
     console.log("firstsda", payload);
+    
   };
+
   return (
     <div className="flex flex-row h-full bg-purple-600">
-      <div className="flex my-[5%] mx-[10%] w-full bg-white rounded-3xl">
+      <div className="flex my-[2%] mx-[10%] w-full bg-white rounded-3xl">
         {showSignup ? (
-          <div className="flex flex-col w-1/2 items-center bg-white py-28 rounded-2xl">
+          <div className="flex flex-col w-1/2 items-center bg-white  justify-center rounded-2xl">
             <span className="text-4xl font-bold text-indigo pb-6">Signup</span>
             <div className="flex flex-col gap-5 my-4 w-[80%] ">
               <input
@@ -57,6 +71,15 @@ const Login = () => {
                 value={lastName}
                 onChange={(e) => {
                   setLastName(e.target.value);
+                }}
+                className=" px-3  py-4 rounded-lg mx-5 border border-gray-200  focus:outline-indigo"
+              />
+              <input
+                type="text"
+                placeholder="User Name"
+                value={createUserName}
+                onChange={(e) => {
+                  setCreateUserName(e.target.value);
                 }}
                 className=" px-3  py-4 rounded-lg mx-5 border border-gray-200  focus:outline-indigo"
               />
@@ -95,8 +118,8 @@ const Login = () => {
             <span className="text-4xl font-bold text-indigo">Login</span>
             <div className="flex flex-col gap-5 my-4 w-[80%] ">
               <input
-                type="email"
-                placeholder="Email Address"
+                type="text"
+                placeholder="Email Address or Username"
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
