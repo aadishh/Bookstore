@@ -52,13 +52,7 @@ const getJwtToken = async (req, res) => {
         message: "User not found",
       });
     }
-
-    
     const passwordCheck = await bcrypt.compare(password, user.password);
-
-
-    console.log("dsadasdadsadas",passwordCheck, user.password , password);
-
     if (!passwordCheck) {
       return res.status(401).json({
         statusCode: 401,
