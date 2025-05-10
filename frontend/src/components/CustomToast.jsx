@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const CustomToast = () => {
-  const { toastText, toastType, showToast, hideToast, updateCustomToast } =
+  const { toastText, toastType, showCustomToast, hideToast } =
     useGlobalContext();
 
   useEffect(() => {
@@ -9,15 +10,15 @@ const CustomToast = () => {
       hideToast();
     }, 3000);
     return () => clearTimeout(timer);
-  },[showToast]);
+  }, [showCustomToast]);
 
   const headingTextColor = () => {
     switch (toastType) {
-      case "success":
+      case "SUCCESS":
         return "text-green-500";
-      case "error":
+      case "ERROR":
         return "text-red-500";
-      case "info":
+      case "INFO":
         return "text-blue-500";
       default:
         return "";
@@ -26,12 +27,12 @@ const CustomToast = () => {
 
   const headingText = () => {
     switch (toastType) {
-      case "success":
-        return "Success";
-      case "error":
-        return "Error";
-      case "info":
-        return "Info";
+      case "SUCCESS":
+        return "SUCCESS";
+      case "ERROR":
+        return "ERROR";
+      case "INFO":
+        return "INFO";
       default:
         return "";
     }
@@ -39,11 +40,11 @@ const CustomToast = () => {
 
   const toastIcon = () => {
     switch (toastType) {
-      case "success":
+      case "SUCCESS":
         return "✓";
-      case "error":
+      case "ERROR":
         return "✗";
-      case "info":
+      case "INFO":
         return "ℹ️";
       default:
         return "";
@@ -52,17 +53,16 @@ const CustomToast = () => {
 
   return (
     <>
-      {showToast && (
+      {showCustomToast && (
         <div
-          className={`fixed bottom-0 right-0 m-4 p-4 bg-white shadow-lg rounded-lg ${headingTextColor()}`}
+          className={`fixed w-auto top-0 right-0 m-4 px-5 py-3 bg-white shadow-lg rounded-lg ${headingTextColor()}`}
         >
-          <div className="flex items-center">
-            <span className="text-2xl mr-2">{toastIcon()}</span>
-            <h3 className={`text-lg font-bold ${headingTextColor()}`}>
-              {headingText()}
-            </h3>
+          <div className="bg-white flex flex-col  items-center gap-4">
+            <div className="text-base flex items-center gap-2">
+              {toastIcon()} {headingText()}{" "}
+              <span className="text-sm text-black">{toastText}</span>
+            </div>
           </div>
-          <p>{toastText}</p>
         </div>
       )}
     </>

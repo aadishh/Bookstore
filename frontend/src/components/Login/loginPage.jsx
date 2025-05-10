@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import CustomButton from "../CustomButton";
 import { LoginUser, SignUpForUser } from "../../services/service";
+import { useGlobalContext } from "../../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showSignup, setShowSignup] = useState(false);
@@ -11,7 +13,8 @@ const Login = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
-
+  const { updateCustomToast } = useGlobalContext();
+  const navigate = useNavigate();
   const handleSignUp = () => {
     let payload = {
       firstName: firstName,
@@ -23,7 +26,7 @@ const Login = () => {
 
     SignUpForUser(payload).then((resp) => {
       if (resp?.statusCode === 200) {
-        
+        updateCustomToast("success", "User Created Successfully");
         setShowSignup(false);
       } else {
         setShowSignup(true);
@@ -37,16 +40,19 @@ const Login = () => {
       password: password,
     };
     LoginUser(payload).then((resp) => {
-      if(resp?.statusCode === 200) {
-        // Handle successful login
-        console.log("Login successful", resp);
-      }
-      else {
-        console.log("Login failed", resp);
+      if (resp?.statusCode === 200) {
+        updateCustomToast("SUCCESS", "Welcome to my BookStore");
+        localStorage.setItem("token", resp?.token);
+
+        // Wait 2 seconds before redirecting
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      } else {
+        console.error("Login failed",error);
+        updateCustomToast("ERROR", "Login failed. Please try again.");
       }
     });
-    console.log("firstsda", payload);
-    
   };
 
   return (

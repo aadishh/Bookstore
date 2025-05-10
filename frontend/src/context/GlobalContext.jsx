@@ -1,30 +1,56 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext, createContext, useState } from "react";
+import PropTypes from "prop-types";
 
-const GlobalContext = props => {
-  const [showCustomToast, setShowCustomToast] = React.useState(props.showCustomToast)
-  const [hideToast, setHideToast] = React.useState(props.hideToast)
-  const [updateCustomToast, setUpdateCustomToast] = React.useState(props.updateCustomToast)
-  const [showToast, setShowToast] = React.useState(false)
+const GlobalContext = createContext();
+
+const GlobalContextProvider = (props) => {
+  const [showCustomToast, setShowCustomToast] = useState(props.showCustomToast);
+  const [toastType, setToastType] = useState(props.toastType);
+  const [toastText, setToastText] = useState(props.toastText);
+
+  const hideToast = () => {
+    setShowCustomToast(false);
+  };
+
+  const updateCustomToast = (_toastType, toastText) => {
+    setShowCustomToast(true);
+    setToastType(_toastType);
+    setToastText(toastText);
+  };
+
   return (
-    <div>
-        <div className="flex flex-row h-full bg-purple-600">
-          <span>{props.toastType}</span>
-            <div className="flex my-[2%] mx-[10%] w-full bg-white rounded-3xl">
-            {props.toastText}
-            </div>
-        </div>
-    </div>
-  )
-}
+    <GlobalContext.Provider
+      value={{
+        updateCustomToast,
+        showCustomToast,
+        toastType,
+        toastText,
+        hideToast,
+        setShowCustomToast,
+      }}
+    >
+      {props.children}
+    </GlobalContext.Provider>
+  );
+};
 
+// STEP 3: Hook to use Context
+const useGlobalContext = () => {
+  const context = useContext(GlobalContext);
+  if (context === undefined) {
+    throw new Error("useGlobalContext must be used within a GlobalContextProvider");
+  }
+  return context;
+};
 
-GlobalContext.propTypes = {
+// PropTypes for validation
+GlobalContextProvider.propTypes = {
   updateCustomToast: PropTypes.func.isRequired,
   showCustomToast: PropTypes.bool.isRequired,
-  toastType: PropTypes.oneOf(['success', 'error', 'info']).isRequired,
+  toastType: PropTypes.oneOf(["SUCCESS", "ERROR", "INFO"]).isRequired,
   toastText: PropTypes.string.isRequired,
-  hideToast: PropTypes.func.isRequired,
-}
+  children: PropTypes.node.isRequired,
+};
 
-export default GlobalContext
+// Export the provider and hook
+export { useGlobalContext, GlobalContextProvider };

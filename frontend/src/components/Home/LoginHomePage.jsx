@@ -36,14 +36,14 @@ const LoginHomePage = (props) => {
                 title="Buy Now"
                 backgroundColor="bg-indigo"
                 textColor="text-white"
-                myOnClick={() => {window.location.href = '/login'}}
+                myOnClick={() => window.location.href = '/login'}
                 borderClass="border-indigo"
               />
               <CustomButton
                 title="Read Sample"
                 backgroundColor="bg-white"
                 textColor="text-indigo"
-                myOnClick={() => {window.location.href = '/login'}}
+                myOnClick={() => window.location.href = '/login'}
                 hoverclass={`hover:bg-indigo hover:text-white`}
                 borderClass={`border-indigo`}
               />

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Contact from "./components/Contact";
@@ -9,14 +9,24 @@ import Books from "./components/Books/Books.page";
 import HomePage from "./components/Home/HomePage";
 import SingleBook from "./components/SingleBook/singleBook.page";
 import Login from "./components/Login/loginPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginHomePage from "./components/Home/LoginHomePage";
+import CustomToast from "./components/CustomToast";
 
 function App() {
   const [login, setLogin] = useState(false);
+  const location = useLocation();
+  const pathname = location.pathname;
+  const hideBar = pathname === "/" || pathname === "/redirection-links";
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setLogin(!!token);
+  }, []);
 
   return (
     <div className="App bg-gray-100">
+      <CustomToast />
       {login ? (
         <div>
           <Navbar />

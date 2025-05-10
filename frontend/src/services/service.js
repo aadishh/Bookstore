@@ -46,3 +46,8 @@ export const LoginUser = async (payload) => {
     return null;
   }
 };
+
+ export const isLoginValid = () => {
+    const token = localStorage.getItem("token");
+    return token 
+  };
