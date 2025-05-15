@@ -72,6 +72,7 @@ const getJwtToken = async (req, res) => {
       statusCode: 200,
       success: true,
       message: "Login successful",
+      name: user.userName,
       token: token,
     });
 

@@ -39,6 +39,7 @@ const CustomImage = ({ name }) => {
       src: "images/svg/Imail.png",
       alt: "mail",
     },
+
     loginImage: {
       src: "images/login.jpeg",
       alt: "login",
@@ -78,6 +79,10 @@ const CustomImage = ({ name }) => {
     indigotwitter: {
       src: "images/svg/Itwitter.svg",
       alt: "Itwitter",
+    },
+    profileBackground: {
+      src: "images/banner.jpg",
+      alt: "banner",
     },
   };
 

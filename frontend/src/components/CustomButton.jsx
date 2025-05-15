@@ -11,7 +11,7 @@ const CustomButton = ({ title, backgroundColor, textColor, hoverclass, PaddingX 
 }
 
 CustomButton.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   textColor: PropTypes.string,
   backgroundColor: PropTypes.string,
   borderColor: PropTypes.string,

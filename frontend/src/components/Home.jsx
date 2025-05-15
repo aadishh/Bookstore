@@ -4,7 +4,7 @@ import CustomButton from './CustomButton'
 
 const Home = ({isBuyNow}) => {
   const [isButtonActive, setButtonActive] = useState(false);
-  const handleBuyNow = {}
+  const handleBuyNow = () => {}
   return (
     <div className='flex flex-row justify-between gap-x-12 mt-[4%]'>
       <div className='flex flex-col flex-wrap items-start gap-y-10 max-w-[500px] py-4'>

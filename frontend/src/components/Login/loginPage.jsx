@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CustomButton from "../CustomButton";
 import { LoginUser, SignUpForUser } from "../../services/service";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import CustomInputFeild from "../CustomInputFeild";
 
 const Login = () => {
   const [showSignup, setShowSignup] = useState(false);
@@ -26,7 +27,7 @@ const Login = () => {
 
     SignUpForUser(payload).then((resp) => {
       if (resp?.statusCode === 200) {
-        updateCustomToast("success", "User Created Successfully");
+        updateCustomToast("SUCCESS", "User Created Successfully");
         setShowSignup(false);
       } else {
         setShowSignup(true);
@@ -43,13 +44,12 @@ const Login = () => {
       if (resp?.statusCode === 200) {
         updateCustomToast("SUCCESS", "Welcome to my BookStore");
         localStorage.setItem("token", resp?.token);
-
-        // Wait 2 seconds before redirecting
+        navigate("/");
         setTimeout(() => {
-          navigate("/");
-        }, 1000);
+          window.location.reload();
+        }, [1000]);
       } else {
-        console.error("Login failed",error);
+        console.error("Login failed", resp);
         updateCustomToast("ERROR", "Login failed. Please try again.");
       }
     });
@@ -62,50 +62,45 @@ const Login = () => {
           <div className="flex flex-col w-1/2 items-center bg-white  justify-center rounded-2xl">
             <span className="text-4xl font-bold text-indigo pb-6">Signup</span>
             <div className="flex flex-col gap-5 my-4 w-[80%] ">
-              <input
+              <CustomInputFeild
                 type="text"
                 placeholder="First Name"
                 value={firstName}
                 onChange={(e) => {
                   setFirstName(e.target.value);
                 }}
-                className=" px-3  py-4 rounded-lg mx-5 border border-gray-200  focus:outline-indigo"
               />
-              <input
+              <CustomInputFeild
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => {
                   setLastName(e.target.value);
                 }}
-                className=" px-3  py-4 rounded-lg mx-5 border border-gray-200  focus:outline-indigo"
               />
-              <input
+              <CustomInputFeild
                 type="text"
                 placeholder="User Name"
                 value={createUserName}
                 onChange={(e) => {
                   setCreateUserName(e.target.value);
                 }}
-                className=" px-3  py-4 rounded-lg mx-5 border border-gray-200  focus:outline-indigo"
               />
-              <input
+              <CustomInputFeild
                 type="email"
                 placeholder="Email Address"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                className=" px-3  py-4 rounded-lg mx-5 border border-gray-200  focus:outline-indigo"
               />
-              <input
+              <CustomInputFeild
                 type="password"
                 placeholder="Password"
                 value={signUpPassword}
                 onChange={(e) => {
                   setSignUpPassword(e.target.value);
                 }}
-                className=" px-3 mx-5 py-4 rounded-lg border border-gray-200  focus:outline-indigo"
               />
             </div>
             <div className="mt-5">
@@ -123,23 +118,21 @@ const Login = () => {
           <div className="flex flex-col w-1/2 justify-center items-center bg-white rounded-tl-3xl rounded-bl-3xl">
             <span className="text-4xl font-bold text-indigo">Login</span>
             <div className="flex flex-col gap-5 my-4 w-[80%] ">
-              <input
+              <CustomInputFeild
                 type="text"
                 placeholder="Email Address or Username"
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
-                className=" px-3  py-4 rounded-lg mx-5 border border-gray-200  focus:outline-indigo"
               />
-              <input
+              <CustomInputFeild
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                className=" px-3 mx-5 py-4 rounded-lg border border-gray-200  focus:outline-indigo"
               />
             </div>
             <div className="flex flex-row justify-between w-[80%] px-5 text-indigo ">

@@ -8,7 +8,7 @@ const CustomToast = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       hideToast();
-    }, 3000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [showCustomToast]);
 
