@@ -88,7 +88,7 @@ const profileDetails = async (req, res) => {
       email,
       phoneNumber,
       address,
-      pincode,
+      pinCode,
       country,
       state,
       city,
@@ -100,12 +100,15 @@ const profileDetails = async (req, res) => {
     user.firstName = firstName;
     user.lastName = lastName;
     user.email = email;
-    user.phoneNumber = phoneNumber;
-    user.address = address;
-    user.pincode = pincode;
-    user.country = country;
-    user.state = state;
-    user.city = city;
+    if (!user.profile) {
+      user.profile = {};
+    }
+    user.profile.address = address;
+    user.profile.pinCode = pinCode;
+    user.profile.state = state;
+    user.profile.country = country;
+    user.profile.city = city;
+    user.profile.phoneNumber = phoneNumber;
 
     await user.save();
 

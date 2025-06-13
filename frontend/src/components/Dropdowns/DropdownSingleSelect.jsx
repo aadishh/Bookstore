@@ -24,6 +24,9 @@ const DropdownSingleSelect = ({
       setIsOpen(false);
     }
   };
+  useEffect(() => {
+    setSelectedItem(value);
+  }, [value]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -33,7 +36,7 @@ const DropdownSingleSelect = ({
   return (
     <>
       {isEdit ? (
-        <div className="relative w-full mx-5 "  ref={dropdownRef}>
+        <div className="relative w-full mx-5 " ref={dropdownRef}>
           <div
             className={`rounded-lg gap-3 px-4 flex flex-row items-center justify-between  ${
               disable ? "bg-[#EFEFEF]" : "bg-white"

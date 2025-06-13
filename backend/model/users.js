@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 
+const ProfileSchema = new mongoose.Schema({
+  address: String,
+  pinCode: String,
+  state: String,
+  country: String,
+  city: String,
+  phoneNumber: String,
+});
+
 const User = new mongoose.Schema({
   firstName: {
     type: String,
@@ -23,26 +32,7 @@ const User = new mongoose.Schema({
     minlength: 6,
   },
 
-  profile: {
-    address: {
-      type: String,
-    },
-    pinCode: {
-      type: String,
-    },
-    state: {
-      type: String,
-    },
-    country: {
-      type: String,
-    },
-    city: {
-      type: String,
-    },
-    phoneNumber: {
-      type: Number,
-    },
-  },
+  profile: ProfileSchema,
   active: Boolean,
 });
 

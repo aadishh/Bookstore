@@ -51,12 +51,12 @@ const ProfilePage = () => {
           firstName: res?.data?.firstName ?? "",
           lastName: res?.data?.lastName ?? "",
           email: res?.data?.email ?? "",
-          address: res?.data?.address ?? "",
-          phoneNumber: res?.data?.phoneNumber ?? "",
-          city: res?.data?.city ?? "",
-          state: res?.data?.state ?? "",
-          country: res?.data?.country ?? "",
-          pincode: res?.data?.pincode ?? "",
+          address: res?.data?.profile?.address ?? "",
+          phoneNumber: res?.data?.profile?.phoneNumber ?? "",
+          city: res?.data?.profile?.city ?? "",
+          state: res?.data?.profile?.state ?? "",
+          country: res?.data?.profile?.country ?? "",
+          pincode: res?.data?.profile?.pinCode ?? "",
           profilePicture: res?.data?.profilePicture ?? "",
         });
       }
