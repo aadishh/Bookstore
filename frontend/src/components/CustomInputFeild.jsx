@@ -29,18 +29,20 @@ const CustomInputFeild = ({
             className="w-full outline-none"
             disabled={disable}
           />
-          <div
-            className={`flex ${
-              disable
-                ? "cursor-pointer hover:bg-white "
-                : "hover:bg-gray-100 cursor-pointer "
-            }  p-3 rounded-full`}
-            onClick={() => setDisable(false)}
-          >
-            <div className="w-3 h-3">
-              <CustomImage name="editButton" />
+          {disable && (
+            <div
+              className={`flex ${
+                disable
+                  ? "cursor-pointer hover:bg-white "
+                  : "hover:bg-gray-100 cursor-pointer "
+              }  p-3 rounded-full`}
+              onClick={() => setDisable(false)}
+            >
+              <div className="w-3 h-3">
+                <CustomImage name="editButton" />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       ) : (
         <div className="flex w-full ">

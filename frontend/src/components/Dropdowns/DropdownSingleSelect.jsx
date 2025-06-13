@@ -39,15 +39,31 @@ const DropdownSingleSelect = ({
         <div className="relative w-full mx-5 " ref={dropdownRef}>
           <div
             className={`rounded-lg gap-3 px-4 flex flex-row items-center justify-between  ${
-              disable ? "bg-[#EFEFEF]" : "bg-white"
+              disable ? "bg-gray-100 border border-gray-200" : "bg-white"
             } `}
           >
             <div
-              className={`gap-2 px-2 py-4 w-full items-center flex justify-between flex-row cursor-pointer shadow-sm`}
+              className={`gap-2 px-2 py-4 w-full items-center flex justify-between flex-row cursor-pointer 
+                disable ? "shadow-sm" : ""
+                `}
               onClick={handleToggle}
             >
               {selectedItem || placeHolder}
-
+            </div>
+            {disable ? (
+              <div
+                className={`flex ${
+                  disable
+                    ? "cursor-pointer hover:bg-white "
+                    : "hover:bg-gray-100 cursor-pointer "
+                }  p-3 rounded-full`}
+                onClick={() => setDisable(false)}
+              >
+                <div className="w-3 h-3">
+                  <CustomImage name="editButton" />
+                </div>
+              </div>
+            ) : (
               <svg
                 className="w-4 h-4 text-gray-600"
                 fill="none"
@@ -61,19 +77,7 @@ const DropdownSingleSelect = ({
                   d="M19 9l-7 7-7-7"
                 />
               </svg>
-            </div>
-            <div
-              className={`flex ${
-                disable
-                  ? "cursor-pointer hover:bg-white "
-                  : "hover:bg-gray-100 cursor-pointer "
-              }  p-3 rounded-full`}
-              onClick={() => setDisable(false)}
-            >
-              <div className="w-3 h-3">
-                <CustomImage name="editButton" />
-              </div>
-            </div>
+            )}
           </div>
           {isOpen && !disable && (
             <div className="absolute botttom-0 shadow z-10 bg-white rounded-lg w-full  max-h-[150px] overflow-y-auto">

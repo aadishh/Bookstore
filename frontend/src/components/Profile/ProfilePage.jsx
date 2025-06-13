@@ -44,24 +44,6 @@ const ProfilePage = () => {
     handleCountryChange();
   }, [data]);
 
-  useEffect(() => {
-    getProfile(userData).then((res) => {
-      if (res.statusCode <= 201) {
-        setdata({
-          firstName: res?.data?.firstName ?? "",
-          lastName: res?.data?.lastName ?? "",
-          email: res?.data?.email ?? "",
-          address: res?.data?.profile?.address ?? "",
-          phoneNumber: res?.data?.profile?.phoneNumber ?? "",
-          city: res?.data?.profile?.city ?? "",
-          state: res?.data?.profile?.state ?? "",
-          country: res?.data?.profile?.country ?? "",
-          pincode: res?.data?.profile?.pinCode ?? "",
-          profilePicture: res?.data?.profilePicture ?? "",
-        });
-      }
-    });
-  }, [userData]);
 
   const handleSave = (username) => {
     let payload = {
@@ -80,12 +62,32 @@ const ProfilePage = () => {
       profileBuild(username, payload).then((res) => {
         if (res.statusCode <= 201) {
           updateCustomToast("SUCCESS", "Profile updated Successfully");
+          window.location.reload()
         } else {
           updateCustomToast("ERROR", "Not able to update details");
         }
       });
     }
   };
+
+  useEffect(() => {
+    getProfile(userData).then((res) => {
+      if (res.statusCode <= 201) {
+        setdata({
+          firstName: res?.data?.firstName ?? "",
+          lastName: res?.data?.lastName ?? "",
+          email: res?.data?.email ?? "",
+          address: res?.data?.profile?.address ?? "",
+          phoneNumber: res?.data?.profile?.phoneNumber ?? "",
+          city: res?.data?.profile?.city ?? "",
+          state: res?.data?.profile?.state ?? "",
+          country: res?.data?.profile?.country ?? "",
+          pincode: res?.data?.profile?.pinCode ?? "",
+          profilePicture: res?.data?.profilePicture ?? "",
+        });
+      }
+    });
+  }, [userData]);
 
   return (
     <div className="flex flex-col">
@@ -133,14 +135,14 @@ const ProfilePage = () => {
             onChange={(e) => setdata({ ...data, email: e.target.value })}
             isEdit={true}
           />
-          <CustomInputFeild
+          {/* <CustomInputFeild
             type="password"
             placeholder="Enter your password"
             name="password"
             value={data.password}
             onChange={(e) => setdata({ ...data, password: e.target.value })}
             isEdit={true}
-          />
+          /> */}
           <CustomInputFeild
             type="text"
             placeholder="Enter your Address"
