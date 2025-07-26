@@ -7,6 +7,9 @@ const ProfileSchema = new mongoose.Schema({
   country: String,
   city: String,
   phoneNumber: String,
+  profileImage: {
+    type: String,
+  },
 });
 
 const User = new mongoose.Schema({

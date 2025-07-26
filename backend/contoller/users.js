@@ -144,6 +144,7 @@ const getProfileDetails = async (req, res) => {
         country: user.profile?.country || "",
         city: user.profile?.city || "",
         phoneNumber: user.profile?.phoneNumber || "",
+        // profileImage: user.profile.profileImage,
       },
     };
 

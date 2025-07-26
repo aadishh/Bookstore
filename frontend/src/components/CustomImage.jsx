@@ -84,6 +84,10 @@ const CustomImage = ({ name }) => {
       src: "images/svg/editButton.svg",
       alt: "editButton",
     },
+    uploadIcon: {
+      src: "images/svg/upload.svg",
+      alt: "upload",
+    },
     profileBackground: {
       src: "images/banner.jpg",
       alt: "banner",

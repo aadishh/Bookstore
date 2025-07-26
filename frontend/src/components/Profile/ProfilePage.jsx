@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CustomInputFeild from "../CustomInputFeild";
 import CustomImage from "../CustomImage";
 import CustomButton from "../CustomButton";
@@ -25,7 +25,9 @@ const ProfilePage = () => {
 
   const [statelist, setStateList] = useState([]);
   const { updateCustomToast } = useGlobalContext();
+  const [ishovered, setIsHovered] = useState(false);
   const { userData } = useAuth();
+  const fileInputRef = useRef(null);
   const countryList = Countries.map((item) => {
     return item.name;
   });
@@ -44,7 +46,6 @@ const ProfilePage = () => {
     handleCountryChange();
   }, [data]);
 
-
   const handleSave = (username) => {
     let payload = {
       firstName: data.firstName,
@@ -62,7 +63,7 @@ const ProfilePage = () => {
       profileBuild(username, payload).then((res) => {
         if (res.statusCode <= 201) {
           updateCustomToast("SUCCESS", "Profile updated Successfully");
-          window.location.reload()
+          window.location.reload();
         } else {
           updateCustomToast("ERROR", "Not able to update details");
         }
@@ -89,6 +90,19 @@ const ProfilePage = () => {
     });
   }, [userData]);
 
+  const handleUploadClick = () => {
+    fileInputRef.current.click(); // This opens the file dialog
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setData({ ...data, profilePicture: file});
+      console.log("Selected file:", file);
+      // Handle the file upload logic here (e.g., upload to server)
+    }
+  };
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col w-full items-start ">
@@ -102,9 +116,29 @@ const ProfilePage = () => {
       </div>
 
       <div className="relative flex flex-col items-center justify-center w-full ">
-        <div className="bg-white flex items-center justify-center rounded-full w-[150px] h-[150px] absolute top-[-50px]">
-          <div className="h-[50%] w-[50%] ">
-            <CustomImage name="userIcon" />
+        <div
+          className={`flex items-center justify-center rounded-full w-[150px] h-[150px] absolute top-[-50px] ${
+            ishovered ? "bg-slate-200" : "bg-white"
+          }`}
+        >
+          <div
+            className="h-[50%] w-[50%] "
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {ishovered ? (
+              <button className="cursor-pointer" onClick={handleUploadClick}>
+                <CustomImage name="uploadIcon" />
+              </button>
+            ) : (
+              <CustomImage name="userIcon" />
+            )}
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              style={{ display: "none" }}
+            />
           </div>
         </div>
       </div>
