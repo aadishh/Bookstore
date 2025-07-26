@@ -9,7 +9,7 @@ import { useGlobalContext } from "../../context/GlobalContext";
 import { useAuth } from "../../context/AuthContext";
 
 const ProfilePage = () => {
-  const [data, setdata] = React.useState({
+  const [data, setData] = React.useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -74,7 +74,7 @@ const ProfilePage = () => {
   useEffect(() => {
     getProfile(userData).then((res) => {
       if (res.statusCode <= 201) {
-        setdata({
+        setData({
           firstName: res?.data?.firstName ?? "",
           lastName: res?.data?.lastName ?? "",
           email: res?.data?.email ?? "",
@@ -150,7 +150,7 @@ const ProfilePage = () => {
             placeholder="Enter your first name"
             name="firstName"
             value={data.firstName}
-            onChange={(e) => setdata({ ...data, firstName: e.target.value })}
+            onChange={(e) => setData({ ...data, firstName: e.target.value })}
             isEdit={true}
           />
           <CustomInputFeild
@@ -158,7 +158,7 @@ const ProfilePage = () => {
             placeholder="Enter your last name"
             name="lastName"
             value={data.lastName}
-            onChange={(e) => setdata({ ...data, lastName: e.target.value })}
+            onChange={(e) => setData({ ...data, lastName: e.target.value })}
             isEdit={true}
           />
           <CustomInputFeild
@@ -166,7 +166,7 @@ const ProfilePage = () => {
             placeholder="Enter your email"
             name="email"
             value={data.email}
-            onChange={(e) => setdata({ ...data, email: e.target.value })}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
             isEdit={true}
           />
           {/* <CustomInputFeild
@@ -174,7 +174,7 @@ const ProfilePage = () => {
             placeholder="Enter your password"
             name="password"
             value={data.password}
-            onChange={(e) => setdata({ ...data, password: e.target.value })}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
             isEdit={true}
           /> */}
           <CustomInputFeild
@@ -182,7 +182,7 @@ const ProfilePage = () => {
             placeholder="Enter your Address"
             name="address"
             value={data.address}
-            onChange={(e) => setdata({ ...data, address: e.target.value })}
+            onChange={(e) => setData({ ...data, address: e.target.value })}
             isEdit={true}
           />
           <CustomInputFeild
@@ -190,7 +190,7 @@ const ProfilePage = () => {
             placeholder="Enter your Phone Number"
             name="phoneNumber"
             value={data.phoneNumber}
-            onChange={(e) => setdata({ ...data, phoneNumber: e.target.value })}
+            onChange={(e) => setData({ ...data, phoneNumber: e.target.value })}
             isEdit={true}
           />
           <CustomInputFeild
@@ -198,7 +198,7 @@ const ProfilePage = () => {
             placeholder="Enter your city"
             name="phoneNumber"
             value={data.city}
-            onChange={(e) => setdata({ ...data, city: e.target.value })}
+            onChange={(e) => setData({ ...data, city: e.target.value })}
             isEdit={true}
           />
           <DropdownSingleSelect
@@ -206,7 +206,7 @@ const ProfilePage = () => {
             value={data.country}
             placeHolder="Select your country"
             onClick={(item) => {
-              setdata({ ...data, country: item });
+              setData({ ...data, country: item });
             }}
             handleChange={handleCountryChange}
             isEdit={true}
@@ -215,7 +215,7 @@ const ProfilePage = () => {
             data={statelist}
             value={data.state}
             placeHolder="Select your state"
-            onClick={(item) => setdata({ ...data, state: item })}
+            onClick={(item) => setData({ ...data, state: item })}
             isEdit={true}
           />
           <CustomInputFeild
@@ -223,7 +223,7 @@ const ProfilePage = () => {
             placeholder="Enter your pincode"
             name="pincode"
             value={data.pincode}
-            onChange={(e) => setdata({ ...data, pincode: e.target.value })}
+            onChange={(e) => setData({ ...data, pincode: e.target.value })}
             isEdit={true}
           />
         </div>
