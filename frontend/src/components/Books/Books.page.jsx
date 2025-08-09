@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomImage from "../CustomImage";
 import { useNavigate } from "react-router-dom";
 import Home from "../Home";
+import { localService } from "../../services/service";
 
 const Books = () => {
   const [mybooks, setMyBooks] = useState([]);
@@ -13,7 +14,7 @@ const Books = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:2000/books")
+    fetch(`${localService}/books`)
       .then((response) => response.json())
       .then((data) => {
         setMyBooks(data);

@@ -1,8 +1,7 @@
-const httpService = "http://localhost:2000";
-
+export const localService = "https://bookstore-backend-gyz6.onrender.com";
 export const getBooks = async () => {
   try {
-    const response = await fetch(`${httpService}/books`);
+    const response = await fetch(`${localService}/books`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -13,7 +12,7 @@ export const getBooks = async () => {
 
 export const SignUpForUser = async (payload) => {
   try {
-    const response = await fetch("http://localhost:2000/users/signup", {
+    const response = await fetch(`${localService}/users/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +30,7 @@ export const SignUpForUser = async (payload) => {
 
 export const LoginUser = async (payload) => {
   try {
-    const response = await fetch("http://localhost:2000/users/login", {
+    const response = await fetch(`${localService}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +54,7 @@ export const isLoginValid = () => {
 export const profileBuild = async (username, payload) => {
   try {
     const response = await fetch(
-      `http://localhost:2000/users/profile/${username}`,
+      `${localService}/users/profile/${username}`,
       {
         method: "POST",
         headers: {
@@ -72,11 +71,10 @@ export const profileBuild = async (username, payload) => {
   }
 };
 
-
 export const getProfile = async (username, payload) => {
   try {
     const response = await fetch(
-      `http://localhost:2000/users/profile/${username}`,
+      `${localService}/users/profile/${username}`,
       {
         method: "GET",
         headers: {
