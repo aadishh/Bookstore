@@ -24,7 +24,7 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use('/',bookRouter)
+app.use('/books',bookRouter)
 app.use('/users',userRouter)
 
 mongoose.connect(process.env.DB_CONNECTION_URL, ).then(() =>{
