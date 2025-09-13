@@ -6,7 +6,7 @@ router.get('/',getAllBooks);
 
 router.get('/:bookId',getSingleBook);
 
-router.post('/getBooks',createBook)
+router.post('/uploadBook',createBook)
 
 
 module.exports = router;

@@ -53,6 +53,18 @@ const Navbar = () => {
         >
           Contact{" "}
         </NavLink>
+        <NavLink
+          to="/admin"
+          className={({ isActive }) =>
+            `text-sm  ${
+              isActive
+                ? "text-indigo font-bold hover:underline"
+                : "hover:text-indigo hover:underline"
+            }`
+          }
+        >
+          Admin{" "}
+        </NavLink>
       </div>
       <div className="flex flex-row gap-6 items-center">
         <SearchBar inputChange={() => {}}/>

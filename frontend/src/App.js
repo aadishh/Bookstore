@@ -14,6 +14,7 @@ import LoginHomePage from "./components/Home/LoginHomePage";
 import CustomToast from "./components/CustomToast";
 import ProfilePage from "./components/Profile/ProfilePage";
 import { useAuth } from "./context/AuthContext";
+import Admin from "./components/admin/Admin";
 function App() {
   const [login, setLogin] = useState(false);
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
           <Footer />
         </div>
