@@ -90,3 +90,17 @@ export const getProfile = async (username, payload) => {
     return null;
   }
 };
+
+export const uploadBook = async (formData) => {
+  try {
+    const response = await fetch(`${localService}/books/uploadBook`, {
+      method: "POST",
+      body: formData,
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error uploading book:", error);
+    return null;
+  }
+};
